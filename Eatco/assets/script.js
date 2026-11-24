@@ -1,21 +1,5 @@
 /* EDIT HERE — Storefront interactions and motion. All product data comes from data.php. */
 (() => {
-  const products = window.EATCO_PRODUCTS || [];
-  const images = window.EATCO_IMAGES || {};
-  const grid = document.getElementById('product-grid');
-  const searchInput = document.getElementById('product-search');
-  const globalSearch = document.getElementById('global-search');
-  const categorySearch = document.getElementById('search-category');
-  const supplierFilter = document.getElementById('supplier-filter');
-  const sortSelect = document.getElementById('sort-select');
-  const priceFilter = document.getElementById('price-filter');
-  const moqFilter = document.getElementById('moq-filter');
-  const cards = [...document.querySelectorAll('.product-card')];
-  let activeCategory = '';
-  let quoteItems = JSON.parse(localStorage.getItem('eatco-quote') || '[]');
-  let savedItems = JSON.parse(localStorage.getItem('eatco-saved') || '[]');
-  const toast = document.querySelector('.toast');
-  let toastTimer;
 
   // Mobile navigation: bind independently and use delegated events for reliable touch support.
   const menuButton = document.querySelector('.menu-toggle');
@@ -66,6 +50,24 @@
     }
   });
   mobileDrawer?.setAttribute('aria-hidden', 'true');
+
+
+  const products = window.EATCO_PRODUCTS || [];
+  const images = window.EATCO_IMAGES || {};
+  const grid = document.getElementById('product-grid');
+  const searchInput = document.getElementById('product-search');
+  const globalSearch = document.getElementById('global-search');
+  const categorySearch = document.getElementById('search-category');
+  const supplierFilter = document.getElementById('supplier-filter');
+  const sortSelect = document.getElementById('sort-select');
+  const priceFilter = document.getElementById('price-filter');
+  const moqFilter = document.getElementById('moq-filter');
+  const cards = [...document.querySelectorAll('.product-card')];
+  let activeCategory = '';
+  let quoteItems = (() => { try { return JSON.parse(localStorage.getItem('eatco-quote') || '[]'); } catch (error) { return []; } })();
+  let savedItems = (() => { try { return JSON.parse(localStorage.getItem('eatco-saved') || '[]'); } catch (error) { return []; } })();
+  const toast = document.querySelector('.toast');
+  let toastTimer;
 
   // The theme switch uses the same centered flip-and-return motion as the currency control.
   const themeButton = document.getElementById('theme-toggle');
