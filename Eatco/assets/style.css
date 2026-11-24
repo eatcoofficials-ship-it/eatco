@@ -136,10 +136,10 @@ html.theme-changing *,html.theme-changing *::before,html.theme-changing *::after
 @media(prefers-reduced-motion:reduce){.theme-scene,.theme-scene *,.theme-coin{animation:none!important;transition:none!important}}
 
 
-/* Remove quote CTA and all interactive controls from product cards. */
+/* Remove quote CTAs while keeping product detail controls visible. */
 .header-quote,
 .mobile-drawer a.button,
-.product-card .product-actions,
+.product-card .add-quote,
 .product-card .save-product {
   display: none !important;
 }
