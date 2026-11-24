@@ -17,6 +17,56 @@
   const toast = document.querySelector('.toast');
   let toastTimer;
 
+  // Mobile navigation: bind independently and use delegated events for reliable touch support.
+  const menuButton = document.querySelector('.menu-toggle');
+  const mobileDrawer = document.getElementById('mobile-navigation');
+  const mobileBackdrop = document.querySelector('.mobile-backdrop');
+  const drawerClose = mobileDrawer?.querySelector('.drawer-close');
+  let menuWasOpen = false;
+  function openMenu() {
+    if (!menuButton || !mobileDrawer) return;
+    menuWasOpen = true;
+    mobileDrawer.classList.add('open');
+    mobileBackdrop?.classList.add('open');
+    menuButton.setAttribute('aria-expanded', 'true');
+    menuButton.setAttribute('aria-label', 'Close menu');
+    mobileDrawer.setAttribute('aria-hidden', 'false');
+    document.body.classList.add('drawer-open');
+    drawerClose?.focus({ preventScroll: true });
+  }
+  function closeMenu() {
+    if (!menuButton || !mobileDrawer) return;
+    menuWasOpen = false;
+    mobileDrawer.classList.remove('open');
+    mobileBackdrop?.classList.remove('open');
+    menuButton.setAttribute('aria-expanded', 'false');
+    menuButton.setAttribute('aria-label', 'Open menu');
+    mobileDrawer.setAttribute('aria-hidden', 'true');
+    document.body.classList.remove('drawer-open');
+    if (document.activeElement === drawerClose) menuButton.focus({ preventScroll: true });
+  }
+  menuButton?.addEventListener('click', () => {
+    if (menuButton.getAttribute('aria-expanded') === 'true') closeMenu();
+    else openMenu();
+  });
+  drawerClose?.addEventListener('click', closeMenu);
+  mobileBackdrop?.addEventListener('click', closeMenu);
+  mobileDrawer?.addEventListener('click', event => {
+    const link = event.target.closest('a[href]');
+    if (link) closeMenu();
+  });
+  document.addEventListener('keydown', event => {
+    if (event.key === 'Escape' && menuWasOpen) closeMenu();
+    if (event.key === 'Tab' && menuWasOpen && mobileDrawer) {
+      const focusable = [...mobileDrawer.querySelectorAll('a[href],button:not([disabled])')];
+      if (!focusable.length) return;
+      const first = focusable[0], last = focusable[focusable.length - 1];
+      if (event.shiftKey && document.activeElement === first) { event.preventDefault(); last.focus(); }
+      else if (!event.shiftKey && document.activeElement === last) { event.preventDefault(); first.focus(); }
+    }
+  });
+  mobileDrawer?.setAttribute('aria-hidden', 'true');
+
   // The theme switch uses the same centered flip-and-return motion as the currency control.
   const themeButton = document.getElementById('theme-toggle');
   const themeIcon = document.getElementById('theme-icon');
