@@ -382,3 +382,21 @@ input,select,textarea,button{max-width:100%}
   .hero-product-main,.floating-card{animation:none!important}
   .reveal{opacity:1;transform:none}
 }
+
+
+/* Eatco requested site-wide refinements (2026-11-24) */
+.currency-toggle,.header-quote,.account-link,.quote-link,.icon-action,.add-quote{display:none!important}
+.header-contact{display:inline-flex;align-items:center;justify-content:center;white-space:nowrap}
+.product-actions{display:flex;gap:10px;flex-wrap:wrap}
+.product-actions .view-product{flex:1 1 100%}
+.brand small{display:none!important}
+.mobile-drawer a.button-yellow{display:none!important}
+.utility-bar,.top-bar,.shipping-strip,.announcement-bar,
+.testimonials-section,.testimonial-section,.customer-feedback,.reviews-section{display:none!important}
+@media(max-width:760px){
+ .header-main{gap:10px}
+ .header-contact{font-size:12px!important;padding:9px 12px!important;min-height:36px}
+ .header-actions{gap:7px}
+ .product-actions .view-product{width:100%}
+ .search{min-width:0}
+}
