@@ -203,5 +203,15 @@ html.theme-changing *,html.theme-changing *::before,html.theme-changing *::after
   .product-card,.category-tile{transition-duration:.24s}
 }
 @media(prefers-reduced-motion:reduce){
-  .menu-toggle,.mobile-drawer,.mobile-backdrop{transition:none!important}
+  .menu-toggle{transition:background-color .2s ease,transform .2s ease!important}.mobile-drawer{transition:transform .34s cubic-bezier(.22,1,.36,1)!important}.mobile-backdrop{transition:opacity .28s ease,visibility .28s ease!important}
+}
+
+/* Reliable mobile drawer layering, scrolling, and accessible touch controls. */
+@media(max-width:760px){
+  .menu-toggle{position:relative;z-index:75!important;width:48px!important;min-width:48px!important;height:48px!important;min-height:48px!important;display:inline-flex!important;align-items:center;justify-content:center;touch-action:manipulation;-webkit-tap-highlight-color:transparent}
+  .mobile-backdrop{z-index:69!important;pointer-events:none}
+  .mobile-backdrop.open{pointer-events:auto}
+  .mobile-drawer{z-index:70!important;max-height:100dvh;overscroll-behavior:contain;padding-top:max(30px,env(safe-area-inset-top));padding-bottom:max(24px,env(safe-area-inset-bottom));gap:10px}
+  .mobile-drawer a:not(.button){min-height:40px;padding:8px 0;touch-action:manipulation}
+  .drawer-close{z-index:2;min-width:44px;min-height:44px;touch-action:manipulation}
 }
