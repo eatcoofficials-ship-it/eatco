@@ -70,7 +70,7 @@ $benefits = [
 
 // EDIT HERE — Ordering journey steps.
 $steps = [['number'=>'01','title'=>'Browse','text'=>'Lorem ipsum dolor sit amet, consectetur adipiscing elit.'],['number'=>'02','title'=>'Request a quote','text'=>'Lorem ipsum dolor sit amet, consectetur adipiscing elit.'],['number'=>'03','title'=>'Confirm','text'=>'Lorem ipsum dolor sit amet, consectetur adipiscing elit.'],['number'=>'04','title'=>'Delivery','text'=>'Lorem ipsum dolor sit amet, consectetur adipiscing elit.']];
-\n// Partner names and quality certifications.\n$partners = ['Partner One','Partner Two','Partner Three','Partner Four','Partner Five','Partner Six'];
+\r\n// Partner names and quality certifications.\r\n$partners = ['Partner One','Partner Two','Partner Three','Partner Four','Partner Five','Partner Six'];
 $certifications = [['name'=>'ISO','detail'=>'Quality management'],['name'=>'HACCP','detail'=>'Food safety'],['name'=>'HALAL','detail'=>'Certified products'],['name'=>'GMP','detail'=>'Good practices']];
 
 // EDIT HERE — Frequently asked questions shown near the quote form.
