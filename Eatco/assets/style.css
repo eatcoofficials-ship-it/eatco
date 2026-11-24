@@ -400,3 +400,20 @@ input,select,textarea,button{max-width:100%}
  .product-actions .view-product{width:100%}
  .search{min-width:0}
 }
+
+/* Fast, responsive first-visit brand reveal. CSS-only motion; no canvas, libraries or font requests. */
+.eatco-intro{position:fixed;inset:0;z-index:2000;display:grid;place-items:center;overflow:hidden;background:#0B0B0B;color:#fff;opacity:1;visibility:visible;transition:opacity .48s cubic-bezier(.22,1,.36,1),visibility .48s; padding:env(safe-area-inset-top) 20px env(safe-area-inset-bottom);pointer-events:none}
+.eatco-intro:before{content:"";position:absolute;width:min(72vw,520px);aspect-ratio:1;border-radius:50%;background:radial-gradient(circle,rgba(255,193,7,.13),rgba(255,193,7,0) 68%);animation:eatco-intro-glow 1.5s ease-out both}
+.eatco-intro__lockup{position:relative;display:flex;flex-direction:column;align-items:center;gap:12px;text-align:center;animation:eatco-intro-rise .72s cubic-bezier(.22,1,.36,1) both}
+.eatco-intro__lockup img{width:clamp(48px,11vw,72px);height:auto;object-fit:contain;filter:drop-shadow(0 0 18px rgba(255,193,7,.24));animation:eatco-intro-mark .9s cubic-bezier(.22,1,.36,1) both}
+.eatco-intro__lockup span{font:700 clamp(28px,7vw,46px)/1 var(--sans);letter-spacing:.24em;padding-left:.24em}
+.eatco-intro__lockup i{display:block;width:clamp(100px,28vw,180px);height:2px;background:linear-gradient(90deg,transparent,#FFC107,transparent);transform:scaleX(0);transform-origin:center;animation:eatco-intro-line .65s .28s cubic-bezier(.22,1,.36,1) forwards}
+.eatco-intro__lockup small{color:rgba(255,255,255,.64);font:500 clamp(9px,2.3vw,11px)/1.5 var(--sans);letter-spacing:.16em;text-transform:uppercase;opacity:0;animation:eatco-intro-caption .5s .42s ease forwards}
+.eatco-intro.is-leaving{opacity:0;visibility:hidden}
+@keyframes eatco-intro-rise{from{opacity:0;transform:translateY(16px) scale(.98)}to{opacity:1;transform:none}}
+@keyframes eatco-intro-mark{0%{opacity:0;transform:scale(.72) rotate(-12deg)}75%{opacity:1;transform:scale(1.06) rotate(2deg)}100%{transform:scale(1) rotate(0)}}
+@keyframes eatco-intro-line{to{transform:scaleX(1)}}
+@keyframes eatco-intro-caption{to{opacity:1}}
+@keyframes eatco-intro-glow{from{opacity:0;transform:scale(.72)}to{opacity:1;transform:scale(1.08)}}
+@media(max-width:480px){.eatco-intro__lockup{gap:10px}.eatco-intro__lockup span{letter-spacing:.2em}}
+@media(prefers-reduced-motion:reduce){.eatco-intro{display:none!important}}
