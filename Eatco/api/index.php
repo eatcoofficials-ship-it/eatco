@@ -75,7 +75,7 @@ if (getenv('VERCEL') && ($_SERVER['REQUEST_METHOD'] ?? 'GET') === 'POST' && ($_P
 </head>
 <body>
 <div class="scroll-progress" aria-hidden="true"></div>
-<div class="utility"><div class="wrap utility-inner"><p>Free bulk shipping over <strong class="currency-value" data-usd="<?= e((string)$site['shipping_threshold']) ?>">$<?= number_format((float)$site['shipping_threshold'],0) ?></strong></p><div class="utility-contact"><a href="tel:<?= e(preg_replace('/[^+\d]/','',$site['phone'])) ?>"><?= e($site['phone']) ?></a><a href="mailto:<?= e($site['email']) ?>"><?= e($site['email']) ?></a><span><?= e($site['language']) ?>⌄</span></div></div></div>
+</div>
 <header class="site-header" id="top">
   <div class="wrap header-main">
     <a class="brand" href="#top" aria-label="Eatco home"><span class="brand-mark">e</span><span><?= e($site['name']) ?><small>WHOLESALE MARKET</small></span></a>
