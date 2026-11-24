@@ -4,12 +4,12 @@ declare(strict_types=1);
 // EDIT HERE — Brand, contact, SEO, quote handling, and utility-bar content.
 $site = [
     'name' => 'Eatco', 'tagline' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
-    'phone' => '+1 (800) 555-0148', 'email' => 'hello@eatco.example', 'address' => '123 Market Street, Chicago, IL 60601',
+    'phone' => '0300 8110441', 'email' => 'eatco.officials@gmail.com', 'address' => 'Plot # 33 B, Sector 2, Near Cheema Plaza, Khayaban-e-Sirsyed, Rawalpindi, Pakistan',
     'shipping_threshold' => 500, 'currency' => 'USD', 'language' => 'English', 'since' => 2008,
     'title' => 'Eatco — Wholesale food, made simpler',
     'description' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Eatco brings quality wholesale food and beverage sourcing together.',
     'social' => ['Instagram' => '#', 'LinkedIn' => '#', 'Facebook' => '#'],
-    'mail_to' => 'hello@eatco.example', 'send_mail' => false,
+    'mail_to' => 'eatco.officials@gmail.com', 'send_mail' => false,
 ];
 
 // EDIT HERE — Reference conversion for display only. Refresh this rate as your business requires.
