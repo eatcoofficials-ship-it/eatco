@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="color-scheme" content="dark">
+<title>Eatco | Loading</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;500&display=swap" rel="stylesheet">
+<style>
+:root{--k:#0B0B0B;--y:#FFC107;--w:#fff;--mute:rgba(255,255,255,.62);box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+html{height:100%;scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;height:100%;background:var(--k);color:var(--w);font:400 16px/1.6 Inter,system-ui,sans-serif;overflow:hidden}
+canvas{position:fixed;inset:0;width:100%;height:100%;display:block}
+.cap{position:fixed;left:0;right:0;bottom:calc(11% + env(safe-area-inset-bottom,0px));text-align:center;color:var(--mute);letter-spacing:.28em;text-transform:uppercase;font-size:clamp(11px,1.4vw,14px);opacity:0;transform:translateY(8px);transition:opacity 1s cubic-bezier(.22,1,.36,1),transform 1s cubic-bezier(.22,1,.36,1);pointer-events:none;margin:0}
+.cap.on{opacity:1;transform:none}
+button{position:fixed;top:calc(18px + env(safe-area-inset-top,0px));right:18px;background:rgba(255,255,255,.08);color:var(--w);border:1px solid rgba(255,255,255,.3);border-radius:999px;padding:.5rem 1.1rem;font:500 14px Inter,system-ui,sans-serif;cursor:pointer;-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);transition:background .3s}
+button:hover{background:var(--y);color:var(--k);border-color:var(--y)}
+button:focus-visible{outline:3px solid var(--y);outline-offset:2px}
+</style>
+</head>
+<body>
+<canvas id="c" role="img" aria-label="Eatco logo reveal: the words Eat Company condense to EATCO, dissolve into golden dust, form a plate-and-fork icon, and the EATCO wordmark draws in beside it."></canvas>
+<p class="cap" id="cap">Good food moves business forward</p>
+<button id="rp" type="button">Replay</button>
+<script>
+const TEXT='EAT COMPANY';
+const KEEP=[0,1,2,4,5];
+const T={dust:6,converge:7.4,solid:9.4,move:10.0,word:10.9,rule:12.5,loop:17.2};
+const cv=document.getElementById('c'),ctx=cv.getContext('2d'),cap=document.getElementById('cap');
+const RM=matchMedia('(prefers-reduced-motion: reduce)').matches;
+const cl=(v,a=0,b=1)=>Math.min(b,Math.max(a,v)),lerp=(a,b,t)=>a+(b-a)*t;
+const ease=t=>t<.5?4*t*t*t:1-Math.pow(-2*t+2,3)/2,out=t=>1-Math.pow(1-t,3);
+let W,H,cx,cy,S,L,k1,k2,fx,wx,ws,font,letters=[],P=[],t0=performance.now(),lastCap=false;
+function rr(c,x,y,w,h,r){c.beginPath();c.moveTo(x+r,y);c.arcTo(x+w,y,x+w,y+h,r);c.arcTo(x+w,y+h,x,y+h,r);c.arcTo(x,y+h,x,y,r);c.arcTo(x,y,x+w,y,r);c.closePath();c.fill()}
+function icon(c,x,y,k,mode,a){
+ c.save();c.translate(x,y);c.scale(k,k);c.translate(-60,-60);c.globalAlpha=a;
+ const d=mode==='d';c.strokeStyle=d?'#FFC107':'#fff';c.lineWidth=6;c.beginPath();c.arc(60,60,54,0,Math.PI*2);c.stroke();
+ c.fillStyle=d?'#FFC107':'#fff';if(d){c.shadowColor='rgba(255,193,7,.6)';c.shadowBlur=18}
+ [[33,22,10,44,5],[55,22,10,44,5],[77,22,10,44,5],[33,56,54,10,3],[55,62,10,38,5]].forEach(r=>rr(c,...r));c.restore();
+}
+const LET=[{x:0,p:[['M40 5H5V55H40',120],['M5 30H34',29]]},{x:52,p:[['M3 55L26 5L49 55',110.1],['M11 41H41',30]]},{x:116,p:[['M2 5H46',44],['M24 5V55',50]]},{x:176,p:[['M47.15 13.93A25 25 0 1 0 47.15 46.07',122.2]]},{x:244,p:[['M30 5A25 25 0 1 1 30 55A25 25 0 1 1 30 5',157.1]]}];
+const PATHS=LET.map(l=>l.p.map(([d,len])=>[new Path2D(d),len]));
+function wordmark(t){
+ ctx.save();ctx.lineWidth=10;ctx.lineJoin='miter';ctx.strokeStyle='#fff';ctx.shadowColor='rgba(255,255,255,.45)';ctx.shadowBlur=10;
+ LET.forEach((l,i)=>{const p=out(cl((t-(T.word+.22*i))/.9));if(p<=.001)return;ctx.save();ctx.translate(wx+l.x*ws,cy-30*ws);ctx.scale(ws,ws);
+ PATHS[i].forEach(([path,len])=>{ctx.setLineDash([len,len+1]);ctx.lineDashOffset=len*(1-p);ctx.stroke(path)});
+ if(i===4){const q=cl((t-(T.word+1.4))/.6);if(q>0){ctx.setLineDash([]);ctx.globalAlpha=q;ctx.lineWidth=2.5;ctx.beginPath();ctx.arc(30,30,10,0,Math.PI*2);ctx.stroke();ctx.fillStyle='#FFC107';ctx.shadowColor='rgba(255,193,7,.8)';ctx.beginPath();ctx.arc(30,30,5*out(q),0,Math.PI*2);ctx.fill()}}ctx.restore()});
+ ctx.restore();const r=ease(cl((t-T.rule)/.9));if(r>0){ctx.fillStyle='#FFC107';ctx.shadowColor='rgba(255,193,7,.7)';ctx.shadowBlur=10;ctx.fillRect(wx,cy+42*ws,304*ws*r,3);ctx.shadowBlur=0}
+}
+function waves(t){
+ const wy=(x,k)=>{const base=H*(.8+.045*k),amp=H*(.07-.012*k);return base+Math.sin(x*.0042+t*.28+k*1.7)*amp+Math.sin(x*.0097-t*.2+k)*amp*.35};
+ for(let k=0;k<3;k++){ctx.beginPath();ctx.moveTo(0,H);for(let x=0;x<=W+10;x+=10)ctx.lineTo(x,wy(x,k));ctx.lineTo(W,H);ctx.closePath();const g=ctx.createLinearGradient(0,H*.68,0,H);g.addColorStop(0,\`rgba(255,193,7,\${.26-k*.06})\`);g.addColorStop(.4,'rgba(60,40,0,.55)');g.addColorStop(1,'rgba(11,11,11,.95)');ctx.fillStyle=g;ctx.fill();ctx.beginPath();for(let x=0;x<=W+10;x+=10){x?ctx.lineTo(x,wy(x,k)):ctx.moveTo(x,wy(x,k))}ctx.strokeStyle=\`rgba(255,224,130,\${.85-k*.25})\`;ctx.lineWidth=1.6;ctx.shadowColor='rgba(255,193,7,.9)';ctx.shadowBlur=16;ctx.stroke();ctx.shadowBlur=0}
+}
+function samp(c,w,h,step,ox,oy){const d=c.getImageData(0,0,w,h).data,pts=[];for(let y=0;y<h;y+=step)for(let x=0;x<w;x+=step)if(d[(y*w+x)*4+3]>110)pts.push([x+ox,y+oy]);return pts}
+function shuffle(a){for(let i=a.length-1;i>0;i--){const j=Math.random()*(i+1)|0;[a[i],a[j]]=[a[j],a[i]]}}
+function setup(){
+ const d=Math.min(devicePixelRatio||1,2);W=innerWidth;H=innerHeight;cv.width=W*d;cv.height=H*d;ctx.setTransform(d,0,0,d,0,0);
+ S=cl(W*.07,26,88);L=cl(Math.min(H*.5,W*.8),180,420);cx=W/2;cy=H*.44;k1=L/120;k2=cl(W*.8/430,.5,1.7);ws=k2*280/304;const tot=150*k2+304*ws,sx=cx-tot/2;fx=sx+60*k2;wx=sx+150*k2;
+ font=\`300 \${S}px Inter,system-ui,sans-serif\`;ctx.font=font;
+ const lay=(s,tr)=>{const w=[...s].map(ch=>ctx.measureText(ch).width),tot=w.reduce((a,b)=>a+b,0)+tr*(w.length-1);let x=cx-tot/2;return w.map(wi=>{const c=x+wi/2;x+=wi+tr;return c})};
+ const A=lay(TEXT,S*.32),B=lay('EAT CO',S*.26),C=lay('EATCO',S*.1);letters=[...TEXT].map((ch,i)=>{const j=KEEP.indexOf(i);return{ch,i,keep:j>=0,x0:A[i],x1:j>=0?B[i]:A[i],x2:j>=0?C[j]:A[i]}});
+ const xs=KEEP.map(i=>letters[i].x2),left=Math.min(...xs)-S,w=Math.ceil(Math.max(...xs)-Math.min(...xs)+2*S),h=Math.ceil(S*2);const oc=document.createElement('canvas');oc.width=w;oc.height=h;const o=oc.getContext('2d');o.font=font;o.fillStyle='#fff';o.textAlign='center';o.textBaseline='middle';KEEP.forEach(i=>o.fillText(letters[i].ch,letters[i].x2-left,h/2));const tp=samp(o,w,h,2,left,cy-h/2);
+ const D=Math.ceil(L+60),lc=document.createElement('canvas');lc.width=lc.height=D;const l=lc.getContext('2d');icon(l,D/2,D/2,k1,'s',1);const lp=samp(l,D,D,3,cx-D/2,cy-D/2);shuffle(tp);shuffle(lp);
+ const N=cl(Math.round(W*H/180),3000,5200);P=Array.from({length:N},(_,i)=>{const a=tp[i%tp.length],b=lp[i%lp.length],ang=Math.random()*6.283,sp=25+Math.random()*95;return{x0:a[0]+(Math.random()-.5),y0:a[1]+(Math.random()-.5),tx:b[0],ty:b[1],vx:Math.cos(ang)*sp,vy:Math.sin(ang)*sp*.6-18,ph:Math.random()*6.283,dl:Math.random()*.9,sz:.9+Math.random()*1.2}});
+}
+function frame(now){
+ let t=RM?14:(now-t0)/1000;if(!RM&&t>T.loop){t0=now;t=0}ctx.clearRect(0,0,W,H);ctx.fillStyle='#0B0B0B';ctx.fillRect(0,0,W,H);waves(t);
+ if(t<T.dust+.7){ctx.font=font;ctx.textAlign='center';ctx.textBaseline='middle';ctx.fillStyle='#fff';const fade=1-cl((t-T.dust)/.5);for(const g of letters){let a=out(cl((t-.12*g.i)/.9)),x=g.x0;if(g.keep){x=lerp(g.x0,g.x1,ease(cl((t-2.7)/1.5)));x=lerp(x,g.x2,ease(cl((t-4.7)/1.2)))}else a*=1-ease(cl((t-2.4-.07*g.i)/.8));a*=fade;if(a<.01)continue;ctx.globalAlpha=a;ctx.shadowColor='rgba(255,255,255,.55)';ctx.shadowBlur=14;ctx.fillText(g.ch,x,cy+Math.sin(t*1.2+g.i)*1.5)}ctx.shadowBlur=0;ctx.globalAlpha=1;const sk=Math.sin(Math.PI*cl((t-5.2)/1.1));if(sk>0){const gr=ctx.createLinearGradient(cx-W*.35,0,cx+W*.35,0);gr.addColorStop(0,'rgba(255,193,7,0)');gr.addColorStop(.5,\`rgba(255,230,150,\${.9*sk})\`);gr.addColorStop(1,'rgba(255,193,7,0)');ctx.fillStyle=gr;ctx.fillRect(cx-W*.35,cy-1,W*.7,2)}}
+ if(t>=T.dust&&t<T.move+1.2){const u=t-T.dust,cs=T.converge-T.dust,pa=cl(u/.3)*(1-.65*ease(cl((t-T.solid)/.9)))*(1-ease(cl((t-T.move)/.6)));ctx.globalCompositeOperation='lighter';for(const p of P){const ts=cs+p.dl,uu=Math.min(u,ts),d=1-Math.exp(-uu*1.1);let x=p.x0+p.vx*d+Math.sin(uu*2+p.ph)*6,y=p.y0+p.vy*d-uu*8+Math.cos(uu*1.7+p.ph)*6;const s=cl((u-ts)/1.7),e=ease(s);if(s>0){const sw=Math.sin(s*Math.PI)*34*Math.sin(p.ph*3);x=lerp(x,p.tx,e)+sw;y=lerp(y,p.ty,e)-sw*.4}if(s>=1){x=p.tx+Math.sin(t*2.4+p.ph)*.5;y=p.ty+Math.cos(t*2.1+p.ph)*.5}ctx.fillStyle=\`rgba(255,\${lerp(255,193,e)|0},\${lerp(255,7,e)|0},\${pa})\`;ctx.fillRect(x,y,p.sz,p.sz)}ctx.globalCompositeOperation='source-over'}
+ const solid=ease(cl((t-T.solid)/.9));if(solid>.01){const m=ease(cl((t-T.move)/1.1));icon(ctx,lerp(cx,fx,m),cy,lerp(k1,k2,m),'d',solid)}if(t>T.word)wordmark(t);const on=t>T.word+2.6&&t<T.loop-.8;if(on!==lastCap){cap.classList.toggle('on',on);lastCap=on}
+}
+function loop(n){frame(n);requestAnimationFrame(loop)}
+const ready=Promise.race([Promise.all([document.fonts.load('300 40px Inter'),document.fonts.ready]),new Promise(r=>setTimeout(r,1500))]).catch(()=>{});
+ready.then(()=>{setup();t0=performance.now();RM?frame(0):requestAnimationFrame(loop)});
+let rz;addEventListener('resize',()=>{clearTimeout(rz);rz=setTimeout(()=>{setup();t0=performance.now();if(RM)frame(0)},150)});
+document.getElementById('rp').onclick=()=>{t0=performance.now()};
+</script>
+</body>
+</html>
