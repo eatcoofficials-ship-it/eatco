@@ -72,6 +72,9 @@ if (getenv('VERCEL') && ($_SERVER['REQUEST_METHOD'] ?? 'GET') === 'POST' && ($_P
   <!-- Vercel Web Analytics -->
   <script>window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };</script>
   <script defer src="/_vercel/insights/script.js"></script>
+  <link rel="icon" type="image/png" href="/assets/eatco-mark.png">
+  <link rel="shortcut icon" href="/assets/eatco-mark.png" type="image/png">
+  <link rel="apple-touch-icon" href="/assets/eatco-mark.png">
 </head>
 <body>
 <div class="scroll-progress" aria-hidden="true"></div>
