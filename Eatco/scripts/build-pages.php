@@ -91,8 +91,6 @@ $pages = [
     'shipping' => ['path'=>'/shipping', 'title'=>'Shipping Information | Eatco', 'description'=>'Shipping information for Eatco wholesale orders.', 'banner'=>true, 'label'=>'Shipping'],
     'careers' => ['path'=>'/careers', 'title'=>'Careers | Eatco', 'description'=>'Explore opportunities to work with Eatco.', 'banner'=>true, 'label'=>'Careers'],
     'help' => ['path'=>'/help', 'title'=>'Help Center | Eatco', 'description'=>'Find help with Eatco wholesale products, quotes, and orders.', 'banner'=>true, 'label'=>'Help Center'],
-    'privacy' => ['path'=>'/privacy', 'title'=>'Privacy Policy | Eatco', 'description'=>'Read the Eatco privacy policy.', 'banner'=>true, 'label'=>'Privacy Policy'],
-    'terms' => ['path'=>'/terms', 'title'=>'Terms of Service | Eatco', 'description'=>'Read the Eatco terms of service.', 'banner'=>true, 'label'=>'Terms of Service'],
     'accessibility' => ['path'=>'/accessibility', 'title'=>'Accessibility | Eatco', 'description'=>'Read about accessibility at Eatco.', 'banner'=>true, 'label'=>'Accessibility'],
 ];
 
@@ -100,8 +98,6 @@ $supportContent = [
     'shipping'=>['Shipping information','Lorem ipsum dolor sit amet, consectetur adipiscing elit. Shipping timing, availability, and delivery details are confirmed with each wholesale quote.'],
     'careers'=>['Careers','Lorem ipsum dolor sit amet, consectetur adipiscing elit. We welcome people who care about good food, reliable service, and the communities we serve.'],
     'help'=>['Help center','Lorem ipsum dolor sit amet, consectetur adipiscing elit. Browse the FAQ or contact our team for help with products, quotes, and orders.'],
-    'privacy'=>['Privacy policy','Lorem ipsum dolor sit amet, consectetur adipiscing elit. This page describes how information shared with Eatco may be used to respond to business inquiries.'],
-    'terms'=>['Terms of service','Lorem ipsum dolor sit amet, consectetur adipiscing elit. These terms describe general use of the Eatco wholesale marketplace.'],
     'accessibility'=>['Accessibility','Lorem ipsum dolor sit amet, consectetur adipiscing elit. Eatco aims to make its website usable across devices and assistive technologies.'],
 ];
 
@@ -154,7 +150,7 @@ function makeMobileDrawer(DOMDocument $dom, array $navigation, array $categories
     }
     $extraPages = [
         ['Categories','/categories'],['FAQ','/faq'],['Shipping','/shipping'],['Careers','/careers'],
-        ['Help Center','/help'],['Privacy Policy','/privacy'],['Terms of Service','/terms'],['Accessibility','/accessibility'],
+        ['Help Center','/help'],['Accessibility','/accessibility'],
     ];
     foreach ($extraPages as [$label, $href]) {
         $link = element($dom, 'a', '', $label);
@@ -204,7 +200,6 @@ function pageSections(string $route, DOMDocument $dom, DOMXPath $xpath, DOMEleme
         return [$section];
     }
     if ($route === 'home-partners' && $section) {
-        if ($node = byClass($xpath, 'testimonial-grid', $section)) $node->parentNode?->removeChild($node);
         return [$section];
     }
     if ($route === 'home-categories' && $section) {
@@ -271,8 +266,8 @@ function pageSpecificMarkup(DOMXPath $xpath, DOMDocument $dom, string $route, st
     $map = [
         'hero'=>'hero', 'categories'=>'categories', 'products'=>'products', 'deals'=>'deals',
         'how-it-works'=>'how-it-works', 'partners'=>'partners', 'about'=>'about', 'contact'=>'contact',
-        'faq'=>'faq', 'shipping'=>'shipping', 'careers'=>'careers', 'help'=>'help', 'privacy'=>'privacy',
-        'terms'=>'terms', 'accessibility'=>'accessibility', 'top'=>'home',
+        'faq'=>'faq', 'shipping'=>'shipping', 'careers'=>'careers', 'help'=>'help',
+        'accessibility'=>'accessibility', 'top'=>'home',
     ];
     $hashMap = ['#top'=>'/', '#categories'=>'/categories', '#products'=>'/products', '#deals'=>'/deals', '#about'=>'/about', '#contact'=>'/contact', '#faq'=>'/faq'];
     foreach (queryNodes($xpath, '//a[@href]') as $anchor) {
@@ -294,12 +289,10 @@ function pageSpecificMarkup(DOMXPath $xpath, DOMDocument $dom, string $route, st
         if ($text === 'FAQs') $anchor->setAttribute('href', '/faq');
         if ($text === 'Shipping information') $anchor->setAttribute('href', '/shipping');
         if ($text === 'Help center') $anchor->setAttribute('href', '/help');
-        if ($text === 'Privacy policy') $anchor->setAttribute('href', '/privacy');
-        if ($text === 'Terms of service') $anchor->setAttribute('href', '/terms');
         if ($text === 'Accessibility') $anchor->setAttribute('href', '/accessibility');
         $activeFooterRoutes = [
             'Contact us'=>'contact','FAQs'=>'faq','Shipping information'=>'shipping','Careers'=>'careers',
-            'Help center'=>'help','Privacy policy'=>'privacy','Terms of service'=>'terms','Accessibility'=>'accessibility',
+            'Help center'=>'help','Accessibility'=>'accessibility',
         ];
         if (($activeFooterRoutes[$text] ?? null) === $route) $anchor->setAttribute('aria-current', 'page');
         if ($text === 'View all products') $anchor->setAttribute('href', '/products');
