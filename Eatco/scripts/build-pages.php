@@ -95,10 +95,10 @@ $pages = [
 ];
 
 $supportContent = [
-    'shipping'=>['Shipping information','Lorem ipsum dolor sit amet, consectetur adipiscing elit. Shipping timing, availability, and delivery details are confirmed with each wholesale quote.'],
-    'careers'=>['Careers','Lorem ipsum dolor sit amet, consectetur adipiscing elit. We welcome people who care about good food, reliable service, and the communities we serve.'],
-    'help'=>['Help center','Lorem ipsum dolor sit amet, consectetur adipiscing elit. Browse the FAQ or contact our team for help with products, quotes, and orders.'],
-    'accessibility'=>['Accessibility','Lorem ipsum dolor sit amet, consectetur adipiscing elit. Eatco aims to make its website usable across devices and assistive technologies.'],
+    'shipping'=>['Shipping information','Shipping timing, availability, and delivery details are confirmed with each wholesale quote.'],
+    'careers'=>['Careers','We welcome people who care about good food, reliable service, and the communities we serve.'],
+    'help'=>['Help center','Browse the FAQ or contact our team for help with products, quotes, and orders.'],
+    'accessibility'=>['Accessibility','Eatco aims to make its website usable across devices and assistive technologies.'],
 ];
 
 $routes = [
