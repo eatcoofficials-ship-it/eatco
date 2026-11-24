@@ -1,6 +1,20 @@
 /* EDIT HERE — Storefront interactions and motion. All product data comes from data.php. */
 (() => {
 
+  // Lightweight one-time-per-tab Eatco brand reveal. Content is ready underneath; no external assets or canvas loop.
+  const introMotionOK = !window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  let showIntro = false;
+  try { showIntro = introMotionOK && !sessionStorage.getItem('eatco-intro-seen'); if (showIntro) sessionStorage.setItem('eatco-intro-seen', '1'); } catch (error) {}
+  if (showIntro && document.body) {
+    const splash = document.createElement('div');
+    splash.className = 'eatco-intro';
+    splash.setAttribute('role', 'presentation');
+    splash.innerHTML = '<div class="eatco-intro__lockup"><img src="/assets/eatco-mark.png" alt="" width="64" height="64"><span>EATCO</span><i></i><small>Wholesale food, made simpler</small></div>';
+    document.body.appendChild(splash);
+    window.setTimeout(() => splash.classList.add('is-leaving'), 1850);
+    window.setTimeout(() => splash.remove(), 2350);
+  }
+
   // Mobile navigation: bind independently and use delegated events for reliable touch support.
   const menuButton = document.querySelector('.menu-toggle');
   const mobileDrawer = document.getElementById('mobile-navigation');
