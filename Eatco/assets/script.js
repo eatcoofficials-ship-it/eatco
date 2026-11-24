@@ -507,14 +507,8 @@
     const specs = document.createElement('table'); specs.className = 'spec-table';
     const specsCaption = document.createElement('caption'); specsCaption.textContent = 'Product details'; specs.appendChild(specsCaption);
     Object.entries(product.specs || {}).forEach(([key, value]) => { const row = specs.insertRow(); row.insertCell().textContent = key; row.insertCell().textContent = value; });
-    const tiers = document.createElement('table'); tiers.className = 'tier-table';
-    const caption = document.createElement('caption'); caption.textContent = 'Bulk pricing'; tiers.appendChild(caption);
-    const head = tiers.createTHead().insertRow(); ['Quantity','Price per unit'].forEach(text => { const th = document.createElement('th'); th.textContent = text; head.appendChild(th); });
-    const body = tiers.createTBody(); (product.tiers || []).forEach(tier => { const row = body.insertRow(); row.insertCell().textContent = `${tier[0]}+ units`; row.insertCell().textContent = formatCurrency(tier[1]); });
-    const buy = document.createElement('div'); buy.className = 'modal-buy';
-    const qty = document.createElement('input'); qty.type = 'number'; qty.min = product.moq; qty.value = product.moq; qty.setAttribute('aria-label', 'Quantity');
-    const add = document.createElement('button'); add.className = 'button button-yellow'; add.type = 'button'; add.textContent = 'Add to quote'; add.addEventListener('click', () => { addToQuote(product.id, qty.value); modal.classList.remove('open'); modal.setAttribute('aria-hidden','true'); document.body.classList.remove('modal-open'); });
-    buy.append(qty, add); info.append(category, supplier, title, description, price, specs, tiers, buy); layout.append(photo, info); modalContent.appendChild(layout);
+    // Product details intentionally omit bulk-pricing tiers and quote-order controls.
+    info.append(category, supplier, title, description, price, specs); layout.append(photo, info); modalContent.appendChild(layout);
     modal.classList.add('open'); modal.setAttribute('aria-hidden','false'); document.body.classList.add('modal-open'); modal.querySelector('.modal-close').focus();
   }
   document.querySelectorAll('.view-product').forEach(button => button.addEventListener('click', () => openProduct(button.dataset.id)));
