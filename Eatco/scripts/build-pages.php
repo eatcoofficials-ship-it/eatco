@@ -350,8 +350,8 @@ function pageSpecificMarkup(DOMXPath $xpath, DOMDocument $dom, string $route, st
     if ($drawer = byClass($xpath, 'quote-drawer')) {
         foreach (queryNodes($xpath, './/a', $drawer) as $anchor) $anchor->setAttribute('href', '/contact');
     }
-    foreach (queryNodes($xpath, '//link[starts-with(@href,"assets/style.css")]') as $asset) $asset->setAttribute('href', '/assets/style.css?v=20261122-theme-icon-v1');
-    foreach (queryNodes($xpath, '//script[starts-with(@src,"assets/script.js")]') as $script) $script->setAttribute('src', '/assets/script.js?v=20261122-theme-coin');
+    foreach (queryNodes($xpath, '//link[starts-with(@href,"assets/style.css")]') as $asset) $asset->setAttribute('href', '/assets/style.css?v=20261124-intro-v1');
+    foreach (queryNodes($xpath, '//script[starts-with(@src,"assets/script.js")]') as $script) $script->setAttribute('src', '/assets/script.js?v=20261124-intro-v1');
     if ($body = queryNodes($xpath, '//body')[0] ?? null) {
         $transition = element($dom, 'div', 'page-transition');
         $transition->setAttribute('aria-hidden', 'true');
