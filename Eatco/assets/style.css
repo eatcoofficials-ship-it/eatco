@@ -134,3 +134,12 @@ html[data-theme="dark"] .category-menu-link:hover,html[data-theme="dark"] .categ
 .theme-coin .currency-coin-code{font-size:8px;letter-spacing:.16em}
 html.theme-changing *,html.theme-changing *::before,html.theme-changing *::after{transition:background-color .86s cubic-bezier(.22,1,.36,1),color .86s cubic-bezier(.22,1,.36,1),border-color .86s cubic-bezier(.22,1,.36,1),box-shadow .86s cubic-bezier(.22,1,.36,1)!important}
 @media(prefers-reduced-motion:reduce){.theme-scene,.theme-scene *,.theme-coin{animation:none!important;transition:none!important}}
+
+
+/* Remove quote CTA and all interactive controls from product cards. */
+.header-quote,
+.mobile-drawer a.button,
+.product-card .product-actions,
+.product-card .save-product {
+  display: none !important;
+}
