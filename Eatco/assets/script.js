@@ -501,7 +501,7 @@
     const supplier = document.createElement('div'); supplier.className = 'product-supplier'; supplier.textContent = `SOLD BY: ${product.store}`;
     const category = document.createElement('div'); category.className = 'product-supplier'; category.style.marginTop = '10px'; category.textContent = product.category;
     const title = document.createElement('h2'); title.id = 'modal-title'; title.textContent = product.name;
-    const description = document.createElement('p'); description.textContent = product.details + ' Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.';
+    const description = document.createElement('p'); description.textContent = product.details + ' Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.';
     const price = document.createElement('div'); price.className = 'modal-price'; price.textContent = `${formatCurrency(product.price)} `;
     const unit = document.createElement('small'); unit.textContent = '/ unit'; price.appendChild(unit);
     const specs = document.createElement('table'); specs.className = 'spec-table';
