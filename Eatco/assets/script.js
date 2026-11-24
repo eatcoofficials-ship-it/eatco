@@ -494,12 +494,6 @@
     });
   }
 
-  // Mobile glass navigation drawer.
-  const drawer = document.querySelector('.mobile-drawer'), backdrop = document.querySelector('.mobile-backdrop'), menuToggle = document.querySelector('.menu-toggle');
-  function openMenu() { drawer.classList.add('open'); backdrop.classList.add('open'); document.body.classList.add('drawer-open'); menuToggle?.setAttribute('aria-expanded','true'); }
-  function closeMenu() { drawer?.classList.remove('open'); backdrop?.classList.remove('open'); document.body.classList.remove('drawer-open'); menuToggle?.setAttribute('aria-expanded','false'); }
-  menuToggle?.addEventListener('click', openMenu); drawer?.querySelector('.drawer-close')?.addEventListener('click', closeMenu); backdrop?.addEventListener('click', closeMenu);
-  drawer?.querySelectorAll('a').forEach(link => link.addEventListener('click', closeMenu));
 
   // Buttons get a small pointer pull and click ripple.
   if (matchMedia('(hover:hover) and (pointer:fine)').matches && !matchMedia('(prefers-reduced-motion: reduce)').matches) {
