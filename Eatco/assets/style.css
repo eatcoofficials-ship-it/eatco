@@ -151,3 +151,7 @@ html.theme-changing *,html.theme-changing *::before,html.theme-changing *::after
 
 /* Remove per-unit and bulk-tier price rows from all product cards site-wide. */
 .product-card .price-row { display: none !important; }
+
+
+/* Uploaded Eatco logo used in the site header. */
+.brand-logo{display:block;width:42px;height:42px;object-fit:contain;flex:0 0 42px;border-radius:50%;}
