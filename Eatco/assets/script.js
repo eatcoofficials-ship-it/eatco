@@ -18,8 +18,8 @@
       window.setTimeout(() => loader.remove(), 650);
     };
     loader.addEventListener('error', closeLoader, { once: true });
-    // Reveal the page after the supplied 17.2-second sequence completes.
-    window.setTimeout(closeLoader, 17400);
+    // Start the full-duration timer after the animation document has loaded.
+    loader.addEventListener('load', () => window.setTimeout(closeLoader, 17000), { once: true });
   }
 
   // Mobile navigation: bind independently and use delegated events for reliable touch support.
