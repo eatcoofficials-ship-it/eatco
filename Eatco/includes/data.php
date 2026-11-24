@@ -70,14 +70,7 @@ $benefits = [
 
 // EDIT HERE — Ordering journey steps.
 $steps = [['number'=>'01','title'=>'Browse','text'=>'Lorem ipsum dolor sit amet, consectetur adipiscing elit.'],['number'=>'02','title'=>'Request a quote','text'=>'Lorem ipsum dolor sit amet, consectetur adipiscing elit.'],['number'=>'03','title'=>'Confirm','text'=>'Lorem ipsum dolor sit amet, consectetur adipiscing elit.'],['number'=>'04','title'=>'Delivery','text'=>'Lorem ipsum dolor sit amet, consectetur adipiscing elit.']];
-
-// EDIT HERE — Partner names, testimonials, and quality certifications.
-$partners = ['Partner One','Partner Two','Partner Three','Partner Four','Partner Five','Partner Six'];
-$testimonials = [
-    ['quote'=>'“Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque habitant morbi tristique senectus.”','name'=>'Partner One','role'=>'Purchasing Director'],
-    ['quote'=>'“Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean commodo ligula eget dolor.”','name'=>'Partner Two','role'=>'Restaurant Owner'],
-    ['quote'=>'“Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec quam felis, ultricies nec.”','name'=>'Partner Three','role'=>'Operations Lead'],
-];
+\n// Partner names and quality certifications.\n$partners = ['Partner One','Partner Two','Partner Three','Partner Four','Partner Five','Partner Six'];
 $certifications = [['name'=>'ISO','detail'=>'Quality management'],['name'=>'HACCP','detail'=>'Food safety'],['name'=>'HALAL','detail'=>'Certified products'],['name'=>'GMP','detail'=>'Good practices']];
 
 // EDIT HERE — Frequently asked questions shown near the quote form.
